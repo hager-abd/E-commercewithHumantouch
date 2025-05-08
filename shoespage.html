@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TOPICO</title>
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="swiperJs/swiper-bundle.min.css" />
+
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="Beauty1.css">
+
+</head>
+<body class="menu-side-in-bag feature-bag">
+    <header>
+        <div class="header-top">
+          <div class="overlay"></div>
+          <div class="container">
+            <style>
+                .slide-sec {
+                    padding: 10px 20px;
+                  }
+              
+                  #open-link {
+                    cursor: pointer;
+                    font-size: 14px; 
+                    text-decoration: none;
+                    color:black;
+                    padding: 5px 10px;
+                    transition: color 0.3s ease;
+                  }
+              
+                  #open-link:hover {
+                    color: #f60; 
+                  }
+              
+                  /* Overlay */
+                  .overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 999;
+                    display: none;
+                  }
+              
+                  .overlay.active {
+                    display: block;
+                  }
+              
+                  /* Sidebar */
+                  .side-bar {
+                    position: fixed;
+                    top: -100%;
+                    left: 0;
+                    width: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
+                    transition: top 0.4s ease-in-out; 
+                    padding: 20px 30px;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                  }
+              
+                  .side-bar.active {
+                    top: 0;
+                  }
+              
+                  #btn-close {
+                    position: absolute;
+                    top: 15px;
+                    right: 20px;
+                    font-size: 24px;
+                    cursor: pointer;
+                    color: #000;
+                  }
+              
+                  .side-bar ul {
+                    list-style: none;
+                    padding: 40px 0 0 0;
+                    margin: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px; /* قللنا المسافات */
+                  }
+              
+                  .side-bar li {
+                    border-bottom: none;
+                  }
+              
+                  .side-bar a {
+                    text-decoration: none;
+                    color: #333;
+                    padding: 5px 10px;
+                    background-color:#f60;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    transition: background 0.3s, color 0.3s;
+                  }
+              
+                  .side-bar a:hover {
+                    background-color: #f60;
+                    color: #007bff;
+                  }
+                </style>
+         
+              
+                <section class="slide-sec">
+                  <a href="#" id="open-link">☰ All categories</a>
+                </section>
+              
+                <!-- Overlay -->
+                <div class="overlay" id="overlay"></div>
+              
+                <!-- Side bar menu -->
+                <div id="side-bar" class="side-bar">
+                  <i id="btn-close" class="fa-solid fa-xmark"></i>
+                  <ul class="side-links">
+                    <li><a href="home.php">Home Appliances</a></li>
+                    <li><a href="sport.html">Sports</a></li>
+                    <li><a href="clothes1.html">Apparel</a></li>
+                    <li><a href="furniture1.html">Furniture</a></li>
+                    <li><a href="jewelry.html">Jewelry</a></li>
+                    <li><a href="clothes1.html">Clothing</a></li>
+                    <li><a href="shoespage.html">Shoes</a></li>
+                    <li><a href="jewelry.html">Accessories</a></li>
+                    <li><a href="elect.html">Electronics</a></li>
+                    <li><a href="Beauty.html">Beauty</a></li>
+                    <li><a href="new_products.php">NEW Products</a></li>
+                    <li><a href="favorites.php">Favorites</a></li>
+                  </ul>
+                </div>
+              
+                <script>
+                  const openLink = document.getElementById('open-link');
+                  const btnClose = document.getElementById('btn-close');
+                  const sidebar = document.getElementById('side-bar');
+                  const overlay = document.getElementById('overlay');
+              
+                  openLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                  });
+              
+                  btnClose.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                  });
+              
+                  overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                  });
+                </script>
+              <div class="left-section">
+                  <a href="#">Featured selections</a>
+                  <a href="#">Order protections</a>
+                  <a href="home.php">Home</a>
+              </div>
+  
+              <div class="right-section">
+                  <span>Deliver to: <img src="https://flagcdn.com/us.svg" alt="US Flag" style="width: 20px; vertical-align: middle; margin-left: 4px; margin-right: 4px;"> US</span>
+                  <a href="#">🌐 English-USD</a>
+                  <a href="cart1.php">🛒</a>
+                  <a href="singin.html">👤 Sign in</a>
+                  <a href="sign_up.html" class="sign-up-btn">Sign up</a>
+              </div>
+          </div>
+  
+          <div class="sub-links">
+              <a href="#">AI Sourcing Agent</a>
+              <a href="#">Buyer Central</a>
+              <a href="#">Help Center</a>
+              <a href="#">Get the app</a>
+              <a href="#">Become a supplier</a>
+          </div>
+        </div>
+      </header>
+
+    <section class="fuature-sec">
+
+        <div class="top-catg">
+            <img src="imgshoes/22.png" alt="">
+        </div>
+        <div class="contanier">
+            
+            <div class="boxs">
+    
+                <div class="box column product-item">
+
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes Nike&image=imgshoes/1.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes Nike&price=7&image=imgshoes/1.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/1.png" class="img-product">
+                        <img src="imgshoes/1.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes Nike</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7</span>
+                            <del>$8</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes Cucci mod&image=imgshoes/2.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes Cucci mod&price=1000&image=imgshoes/2.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/2.png" class="img-product">
+                        <img src="imgshoes/2.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes Cucci mod</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$1000</span>
+                            
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes Cucci classic&image=imgshoes/3.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes Cucci classic&price=1200&image=imgshoes/3.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">40%</span>
+                        <img src="imgshoes/3.png" class="img-product">
+                        <img src="imgshoes/3.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes Cucci classic</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$1200</span>
+                            <del>$2000</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes sport&image=imgshoes/4.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes sport&price=10&image=imgshoes/4.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/4.png" class="img-product">
+                        <img src="imgshoes/4.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes sport </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$10</span>
+                          
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes sport&image=imgshoes/4.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes sport&price=10&image=imgshoes/4.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">39%</span>
+                        <img src="imgshoes/5.png"  class="img-product">
+                        <img src="imgshoes/5.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link">  shoes addidas  </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$9</span>
+                            <del>$12</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes hm white&image=imgshoes/6.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes hm white&price=7&image=imgshoes/6.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/6.png" class="img-product">
+                        <img src="imgshoes/6.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes hm white</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7</span>
+                           
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes umbro black&image=imgshoes/7.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoe sumbro black&price=7&image=imgshoes/7.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/7.png" class="img-product">
+                        <img src="imgshoes/7.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link">shoes umbro black </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7</span>
+                            <del>$8</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes sport green&image=imgshoes/8.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes sport green&price=9&image=imgshoes/8.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/8.png" class="img-product">
+                        <img src="imgshoes/8.png"class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes sport green</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$9</span>
+                            <del>$10</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes classic lacosta&image=imgshoes/9.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes classic lacosta&price=30&image=imgshoes/9.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/9.png" class="img-product">
+                        <img src="imgshoes/9.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes classic lacosta </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$30</span>
+                          
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes trendy&image=imgshoes/10.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes trendy&price=4&image=imgshoes/10.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <img src="imgshoes/10.png" class="img-product">
+                        <img src="imgshoes/10.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes trendy</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$4</span>
+                            
+                        </div>
+            
+                    </div>
+                </div>
+    
+
+                <div class="box column product-item">
+
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes cucci &image=imgshoes/11.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes cucci &price=7&image=imgshoes/11.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/11.png"class="img-product">
+                        <img src="imgshoes/11.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes cucci </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7000</span>
+                            <del>$8000</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes children&image=imgshoes/12.png"><i class="fa-regular fa-heart"></i></a></li>
+                            <li> <a href="cart1.php?name=shoes children&price=7&image=imgshoes/12.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/12.png" class="img-product">
+                        <img src="imgshoes/12.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes children</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7</span>
+                           
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes asics&image=imgshoes/13.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes asics&price=8&image=imgshoes/13.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">40%</span>
+                        <img src="imgshoes/13.png" class="img-product">
+                        <img src="imgshoes/13.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes asics</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$8</span>
+                            <del>$12</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes women bink&image=imgshoes/14.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes women bink&price=6&image=imgshoes/14.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/14.png" class="img-product">
+                        <img src="imgshoes/14.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes women bink </a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$6</span>
+                            
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes Salomon purple&image=imgshoes/15.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes Salomon purple&price=8&image=imgshoes/15.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">39%</span>
+                        <img src="imgshoes/15.png" class="img-product">
+                        <img src="imgshoes/15.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes Salomon purple</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$8</span>
+                            <del>$8.6</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes  Teva&image=imgshoes/16.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes  Teva&price=7&image=imgshoes/16.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/16.png"  class="img-product">
+                        <img src="imgshoes/16.png"  class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link">shoes Teva</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$7</span>
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes classic man&image=imgshoes/17.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes classic man&price=6&image=imgshoes/17.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/17.png" class="img-product">
+                        <img src="imgshoes/17.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes classic man</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$6</span>
+                            <del>$6.6</del>
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes supreme black&image=imgshoes/18.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes supreme black&price=5&image=imgshoes/18.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <span class="discount">34%</span>
+                        <img src="imgshoes/18.png"  class="img-product">
+                        <img src="imgshoes/18.png"  class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes supreme black</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$5</span>
+                            
+                        </div>
+            
+                    </div>
+                </div>
+    
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes newbalance&image=imgshoes/19.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes newbalance&price=4&image=imgshoes/19.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        
+                        <img src="imgshoes/19.png"class="img-product">
+                        <img src="imgshoes/19.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes newbalance</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$4</span>
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="box column product-item">
+    
+                    <div class="product-btn">
+                        <ul class="product-action">
+                            <li><a href="favorites.php?name= shoes Timberland&image=imgshoes/20.png"><i class="fa-regular fa-heart"></i></a></li>
+                           <li> <a href="cart1.php?name=shoes Timberland&price=9&image=imgshoes/20.png"><i class="fa-solid fa-cart-arrow-down"></i></a> </li>
+                            <li><a href="#"><i class="fa-solid fa-print"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="div-img">
+                        <img src="imgshoes/20.png" class="img-product">
+                        <img src="imgshoes/20.png" class="hover-img">
+                    </div>
+                    <div class="content">
+                        <a class="product-item-link"> shoes Timberland</a>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div class="price">
+                            <span>$9</span>
+                          
+                        </div>
+            
+                    </div>
+                </div>
+    
+        
+        
+            </div>
+
+            
+        </div>
+    </section>
+
+    
+    <div class="newsletter">
+        <div class="contanier">
+            <div class="subscribe-content">
+                <img src="img/icon_email.png" alt="">
+                <div class="text">
+                    <h4>Sign up for the latest news</h4>
+                    <p>Sign up with your email to receive the latest news and new products</p>
+                    <span></span>
+                </div>
+            </div>
+            <div class="subscribe-form">
+                    <form action="">
+                        <input type="search" placeholder="Search her...">
+                        <button class="btn-srch">Register</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-top">
+        <a href="#">Back to top</a>
+    </div>
+
+    <footer>
+        <div class="contanier">
+            <div class="top-footer">
+                <div class="row">
+                    <img src="Capture.PNG" alt="">
+                    <div class="hotline">
+                        
+                        <div class="hotline-text">
+                            <h6>24/7 Customer Service</h6>
+                            <span>(+100) 123 456 7890</span>
+                        </div>
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    
+                </div>
+                <div class="small-row">
+                    <h6>Learn more about us</h6>
+                    <div class="links-row">
+                        <a href="#"> <i class="fa-solid fa-angle-left"></i>Information about Exprimo</a>
+                        <a href="#"><i class="fa-solid fa-angle-left"></i>Shipping and Delivery</a>
+                       
+                    </div>
+                </div>
+
+                <div class="small-row">
+                    <h6>Shop with us</h6>
+                    <div class="links-row">
+                        <a href="#"><i class="fa-solid fa-angle-left"></i>Your Account</a>
+                        <a href="#"> <i class="fa-solid fa-angle-left"></i>Your Purchases</a>
+                        <a href="#"> <i class="fa-solid fa-angle-left"></i>Your addresses</a>
+                        <a href="#"> <i class="fa-solid fa-angle-left"></i>Your Lists</a>
+                    </div>
+                </div>
+
+                <div class="small-row">
+                    <h6>Let us help you</h6>
+                    <div class="links-row">
+                        <a href="#"><i class="fa-solid fa-angle-left"></i>Help & Support</a>
+<a href="#"><i class="fa-solid fa-angle-left"></i>Track Order</a>
+<a href="#"><i class="fa-solid fa-angle-left"></i>Return Policy</a>
+<a href="#"><i class="fa-solid fa-angle-left"></i>Terms & Conditions</a>
+                    </div>
+                </div>
+
+        
+
+            </div>
+
+        </div>
+
+        <div class="bottom-footer">
+            <div class="contanier">
+                <p>Copyright &copy; <span>Topico. </span>Powered by <span>Mahmoud Reda</span></p>
+            <div class="payment">
+                <img src="img/payment-1.png" alt="">
+                <img src="img/payment-2.png" alt="">
+                <img src="img/payment-3.png" alt="">
+                <img src="img/payment-4.png" alt="">
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="swiperJs/swiper-bundle.min.js"></script>
+
+    <!-- Linke File JS -->
+        <script src="Beauty2.js"></script>
+</body>
+</html>

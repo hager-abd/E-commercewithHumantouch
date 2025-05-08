@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background-image: url(blind.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h2 {
+  color: #f60;
+  text-shadow: 1px 1px 4px black;
+  margin-bottom: 30px; /* زودنا المسافة تحت العنوان */
+}
+
+
+    .voice-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.voice-section button {
+  background-color: rgba(0, 0, 0, 0.4); /* لون شبه خلفية الشاشة */
+  border: none;
+  color: orange;
+  font-size: 20px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.voice-section button:hover {
+  background-color: rgba(255, 102, 0, 0.8); /* برتقالي شفاف عند المرور */
+  color: white;
+}
+
+#voice-status {
+  font-size: 18px;
+  color: orange;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(255, 255, 255, 0.1);
+}
+/*snack bar*/
+    
+.snackbar {
+      visibility: hidden;
+      width: 30vw; /* 25% من عرض الشاشة */
+      max-width: none;
+      background-color: #ff9800; /* برتقالي */
+      color: #fff;
+      padding: 12px 16px; /* padding صغير */
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    .snackbar.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .snackbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .snackbar button:hover {
+      color: #ffdddd;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <title>مساعد صوتي للطلب</title>
+</head>
+<body dir="rtl">
+
+<div class="voice-section">
+  <h2>🎧 اطلب منتجاتك بالصوت</h2>
+  <button onclick="startListening()">🎤 اضغط للطلب بالصوت</button>
+  <div id="voice-status">قول: "أضف ساعة" أو "اعرض السلة"</div>
+</div>
+<div id="snackbar" class="snackbar">
+  <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>أعمى</span></a>
+  <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>🧠 أميه</span></a> 
+  <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>🔇 الصم والبكم</span></a> 
+   <button onclick="hideSnackbar()">×</button>
+ </div>
+
+
+
+
+  
+
+  <script>
+         const snackbar = document.getElementById("snackbar");
+     let autoHideTimeout;
+   
+     
+    let currentStep = "";
+    let orderData = { items: [], total: 0, name: "", address: "", phone: "" };
+    let spacePressCount = 0;
+    let spaceTimer;
+    let inactivityTimer;
+
+    window.onload = function() {
+      speak(" مرحبًا بك في علي بابا لذوي الاحتياجات الخاصة. من فضلك في كل مرة اضغط على زر المسطرة مرتين بسرعة، وهو أكبر زر في لوحة المفاتيح. وإذا لم أتكلم، افعل التالي: حرّك إصبعك من زر المسطرة أربع مرات إلى اليمين، ستجد زرًا عالي الملمس، اضغط عليه أربع مرات ، ثم حرّك لأعلى ثلاث مرات من موقعك ثم اضغط على زر إنتر.");
+      showSnackbar(); // أول ظهور
+      setInterval(showSnackbar, 5000); 
+      enableKeyboardLearningRedirect();//three spaces yo go learning
+    }
+    function showSnackbar() {
+       snackbar.classList.add("show");
+       clearTimeout(autoHideTimeout);
+   
+       autoHideTimeout = setTimeout(() => {
+         snackbar.classList.remove("show");
+       }, 4000); // تفضل 4 ثواني
+     }
+   
+     function hideSnackbar() {
+       snackbar.classList.remove("show");
+       clearTimeout(autoHideTimeout);
+     }
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      msg.lang = "ar-EG";
+      window.speechSynthesis.speak(msg);
+    }
+
+    document.addEventListener("keydown", function(e) {
+      if (e.code === "Space") {
+        spacePressCount++;
+        clearTimeout(spaceTimer);
+
+        spaceTimer = setTimeout(() => {
+          if (spacePressCount >= 2) {
+            startListening();
+          }
+          spacePressCount = 0;
+        }, 400);
+      }
+    });
+
+    function startListening() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'ar-EG';
+      recognition.start();
+      document.getElementById("voice-status").textContent = "🎤 جاري الاستماع...";
+
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        speak("لم أسمع شيئًا. تذكير: اضغط على زر المسطرة مرتين بسرعة. وإذا لم أتكلم، حرّك أربع مرات يمينًا من المسطرة، ثم اضغط الزر المرتفع أربع مرات ، ثم حرّك لأعلى ثلاث مرات واضغط على زر إنتر");
+      }, 20000);
+
+      recognition.onresult = function(event) {
+        clearTimeout(inactivityTimer);
+        const transcript = event.results[0][0].transcript.trim();
+        document.getElementById("voice-status").textContent = "أنت قلت: " + transcript;
+
+        if (currentStep === "get-name") {
+          orderData.name = transcript;
+          speak("ما هو عنوان التوصيل؟");
+          currentStep = "get-address";
+          return;
+        }
+
+        if (currentStep === "get-address") {
+          orderData.address = transcript;
+          speak("ما هو رقم الهاتف؟");
+          currentStep = "get-phone";
+          return;
+        }
+
+        if (currentStep === "get-phone") {
+          orderData.phone = transcript;
+          speak("تم تأكيد الطلب بنجاح، شكرًا لك. لدي سيستم مقترح لك إذا أردت تعلم استخدام لوحة المفاتيح، اضغط على زر انتر مراتين بسرعة.");
+          sendOrderToServer(orderData);
+          currentStep = "";
+          return;
+        }
+
+     if (transcript.includes("تاكيد الطلب") && currentStep === "") {
+      speak("هل تريد تأكيد الطلب؟ قل نعم أو لا.");
+      currentStep = "confirm-order";
+       return;
+     }
+
+      if (currentStep === "confirm-order") {
+        if (transcript.includes("نعم")) {
+          speak("من فضلك قل اسمك الكامل.");
+          currentStep = "get-name";
+          } else if (transcript.includes("لا")) {
+            speak("تم إلغاء تأكيد الطلب. يمكنك متابعة التسوق. اضغط على زر المسطرة مرتين بسرعة إذا أردت تأكيد الطلب لاحقًا.");
+            currentStep = "";
+            } else {
+            speak("لم أفهم، من فضلك قل نعم أو لا.");
+           }
+             return;
+             }
+
+        // أوامر الشراء
+        if (transcript.includes("ساعه")) {
+          addToCart("2.jpg", 150, "ساعه");
+        } else if (transcript.includes("موبايل")) {
+          addToCart("images/phone.jpg", 200, "موبايل");
+        } else if (transcript.includes("رز")) {
+          addToCart("images/phone.jpg", 200, "رز");
+        }else if (transcript.includes("شنطه")) {
+          addToCart("images/phone.jpg", 200, "شنطه");
+        }else if (transcript.includes("بيتزا")) {
+          addToCart("images/phone.jpg", 300, "بيتزا");
+        }
+        else if (transcript.includes("نظاره")) {
+          addToCart("images/phone.jpg", 500, "نظاره");
+        }else if (transcript.includes("فستان ")) {
+          addToCart("images/laptop.jpg", 500, "فستان ");
+        } else if (transcript.includes("اعرض السله") || transcript.includes("ايه في السله")) {
+          readCartItems();
+        } else {
+          speak("لم أفهم، حاول مرة أخرى.");
+        }
+      };
+
+      recognition.onerror = function(e) {
+        clearTimeout(inactivityTimer);
+        document.getElementById("voice-status").textContent = "حصلت مشكلة: " + e.error;
+        speak("حصلت مشكلة أثناء الاستماع.");
+      };
+    }
+
+    function addToCart(image, price, name) {
+      speak(`تمت إضافة ${name} إلى السلة.`);
+      orderData.items.push({ name, price });
+      orderData.total += price;
+    }
+
+    function readCartItems() {
+      if (orderData.items.length === 0) {
+        speak("السلة فارغة.");
+      } else {
+        let summary = "السلة تحتوي على: ";
+        orderData.items.forEach(item => summary += item.name + "، ");
+        summary += "بإجمالي " + orderData.total + " جنيه.";
+        speak(summary);
+      }
+    }
+
+    function sendOrderToServer(data) {
+      console.log("تم إرسال الطلب:", data);
+      
+    }
+    function enableKeyboardLearningRedirect() {
+  let enterCount = 0;
+  let enterTimer;
+
+  document.addEventListener("keydown", function enterListener(e) {
+    if (e.code === "Enter") {
+      enterCount++;
+      clearTimeout(enterTimer);
+
+      enterTimer = setTimeout(() => {
+        if (enterCount === 2) {
+          speak(" جاري تحويلك لتعلم استخدام لوحة المفاتيح اضغط زر المسطره مرتين للارشاد.");
+          window.location.href = "learnbl/index.html";
+        }
+        enterCount = 0;
+      }, 500);
+    }
+  }); 
+}
+
+
+   </script>
+</body>
+</html>
+

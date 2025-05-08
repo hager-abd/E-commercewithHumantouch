@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alibaba.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="swiperJs/swiper-bundle.min.css" />
+
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="style28.Css">
+    <script src="main1.js"></script>
+    <style>
+    /*snack bar*/
+    
+      .snackbar {
+      visibility: hidden;
+      width: 30vw; /* 25% من عرض الشاشة */
+      max-width: none;
+      background-color: #ff9800; /* برتقالي */
+      color: #fff;
+      padding: 12px 16px; /* padding صغير */
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    .snackbar.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .snackbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .snackbar button:hover {
+      color: #ffdddd;
+    }</style>
+</head>
+<body>
+  <div class="section-1">
+    <header>
+      <div class="header-top">
+        <div class="overlay"></div>
+        <div class="container">
+          <style>
+          .slide-sec {
+              padding: 10px 20px;
+            }
+        
+            #open-link {
+              cursor: pointer;
+              font-size: 14px; 
+              text-decoration: none;
+              color:white;
+              padding: 5px 10px;
+              transition: color 0.3s ease;
+            }
+        
+            #open-link:hover {
+              color: #f60; 
+            }
+        
+            /* Overlay */
+            .overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              background-color: rgba(0, 0, 0, 0.5);
+              z-index: 999;
+              display: none;
+            }
+        
+            .overlay.active {
+              display: block;
+            }
+        
+            /* Sidebar */
+            .side-bar {
+              position: fixed;
+              top: -100%;
+              left: 0;
+              width: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              z-index: 1000;
+              transition: top 0.4s ease-in-out; 
+              padding: 20px 30px;
+              box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+        
+            .side-bar.active {
+              top: 0;
+            }
+        
+            #btn-close {
+              position: absolute;
+              top: 15px;
+              right: 20px;
+              font-size: 24px;
+              cursor: pointer;
+              color: #000;
+            }
+        
+            .side-bar ul {
+              list-style: none;
+              padding: 40px 0 0 0;
+              margin: 0;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+            }
+        
+            .side-bar li {
+              border-bottom: none;
+            }
+        
+            .side-bar a {
+              text-decoration: none;
+              color: #333;
+              padding: 5px 10px;
+              background-color:#f60;
+              border-radius: 4px;
+              font-size: 14px;
+              transition: background 0.3s, color 0.3s;
+            }
+        
+            .side-bar a:hover {
+              background-color: #f60;
+              color: #007bff;
+            }
+          </style>
+   
+        
+          <section class="slide-sec">
+            <a href="#" id="open-link">☰ All categories</a>
+          </section>
+        
+          <!-- Overlay -->
+          <div class="overlay" id="overlay"></div>
+        
+          <!-- Side bar menu -->
+          <div id="side-bar" class="side-bar">
+            <i id="btn-close" class="fa-solid fa-xmark"></i>
+            <ul class="side-links">
+              <li><a href="home.php">Home Appliances</a></li>
+              <li><a href="sport.html">Sports</a></li>
+              <li><a href="clothes1.html">Apparel</a></li>
+              <li><a href="furniture1.html">Furniture</a></li>
+              <li><a href="jewelry.html">Jewelry</a></li>
+              <li><a href="clothes1.html">Clothing</a></li>
+              <li><a href="shoespage.html">Shoes</a></li>
+              <li><a href="jewelry.html">Accessories</a></li>
+              <li><a href="elect.html">Electronics</a></li>
+              <li><a href="Beauty.html">Beauty</a></li>
+              <li><a href="new_products.php">NEW Products</a></li>
+              <li><a href="favorites.php">Favorites</a></li>
+            </ul>
+          </div>
+        
+          <script>
+            const openLink = document.getElementById('open-link');
+            const btnClose = document.getElementById('btn-close');
+            const sidebar = document.getElementById('side-bar');
+            const overlay = document.getElementById('overlay');
+        
+            openLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              sidebar.classList.add('active');
+              overlay.classList.add('active');
+            });
+        
+            btnClose.addEventListener('click', () => {
+              sidebar.classList.remove('active');
+              overlay.classList.remove('active');
+            });
+        
+            overlay.addEventListener('click', () => {
+              sidebar.classList.remove('active');
+              overlay.classList.remove('active');
+            });
+          </script>
+            <div class="left-section">
+                <a href="#">Featured selections</a>
+                <a href="#">Order protections</a>
+                <a href="home.php">Home</a>
+                <a href="blind/blindorder.html">blind</a>
+            </div>
+
+            <div class="right-section">
+                <span>Deliver to: <img src="https://flagcdn.com/us.svg" alt="US Flag" style="width: 20px; vertical-align: middle; margin-left: 4px; margin-right: 4px;"> US</span>
+                <a href="#">🌐 English-USD</a>
+                <a href="favorites.php"><i class="fa-regular fa-heart"></i></a>
+                <a href="cart1.php">🛒</a>
+                <a href="singin.html">👤 Sign in</a>
+                
+                <a href="sign_up.html" class="sign-up-btn">Sign up</a>
+            </div>
+        </div>
+
+        <div class="sub-links">
+            <a href="new_products.php">Updates</a>
+            <a href="#">AI Sourcing Agent</a>
+            <a href="#">Buyer Central</a>
+            <a href="#">Help Center</a>
+            <a href="#">Get the app</a>
+            <a href="#">Become a supplier</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="header-info">
+      <div class="container">
+        <div class="barvideo">
+          <a href="#" id="videoTrigger">
+            <div class="video-icon">
+              <div class="play"></div>
+            </div>
+          </a>
+          <div id="videoModal" class="modal">
+            <div class="modal-content">
+              <span class="close" id="closeModal">&times;</span>
+              <video controls >
+                <source src="video.MP4" type="video/mp4"> 
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <p>
+            <font size="5">Learn about Alibaba.com</font><br><br>
+          </p>
+        </div>
+
+          <div class="bar">
+              <p>
+                  <font size="7.5">The leading B2B B2C Blind user ecommerce platform for global trade</font>
+              </p>
+          </div>
+
+          <div style="position: absolute; bottom:275px; left: 15px; width: 720px; background-color: white; border-radius: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; align-items: center; padding: 10px;">
+            <div style="position: relative; margin-right: 10px;">
+              <div onclick="toggleCategories()" style="background-color: #fff; border: 1px solid #ccc; padding: 12px; cursor: pointer; border-radius: 50%; color: orange; font-weight: bold; font-size: 24px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-bars" style="font-size: 20px; color: orange;"></i>
+              </div>
+          
+              <!-- list search-->
+              <div id="categoryList" style="display: none; position: absolute; top: 60px; left: 0; width: 200px; background-color: #fff; border: 1px solid #ccc; max-height: 200px; overflow-y: auto; z-index: 2000; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <div style="padding: 10px; cursor: pointer;"> <a href="sport.html" style="color:black" > Sports </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="clothes1.html" style="color:black" > Apparel </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="furniture1.html" style="color:black" > Furniture  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="jewelry.html" style="color:black" > Jewelry  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="clothes1.html" style="color:black" > Clothing  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="shoespage.html" style="color:black" > Shoes  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="jewelry.html" style="color:black" > Accessories  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="elect.html" style="color:black" > Electronics  </a></div>
+                <div style="padding: 10px; cursor: pointer;"> <a href="Beauty.html" style="color:black" > beauty  </a></div>
+              </div>
+            </div>
+          
+            <!-- bottom search-->
+            <input type="text" placeholder="Search here ....." style="flex: 1; border: none; padding: 1-px 20px; font-size: 16px; outline: none;">
+            <button style="display: flex; align-items: center; gap: 6px; background-color: #ff6a00db; color: white; border: none; padding: 14px 18px; font-size: 16px; cursor: pointer; border-radius: 0 30px 30px 0;">
+              <i class="fas fa-search" style="font-size: 16px;"></i> search
+            </button>
+          </div>
+          
+          <!-- JavaScript -->
+          <script>
+            function toggleCategories() {
+              const list = document.getElementById('categoryList');
+              list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+            }
+          
+            document.addEventListener('click', function (e) {
+              const dropdown = document.getElementById('categoryList');
+              const trigger = e.target.closest('.fa-bars');
+              
+              // If the click is outside the dropdown and the trigger button, hide the dropdown
+              if (!trigger && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+              }
+            });
+          </script>
+           <div class="frequently-searched">
+                <p>
+                  <span class="label">Frequently searched:</span>
+                  <a href="clothes1.html">designer bags</a>
+                  <a href="jewelry.html">women's</a>
+                  <a href="clothes1.html">essentials hoodie</a>
+                </p>
+              </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section-2">
+    <!-- snackbar -->
+    <div id="snackbar" class="snackbar">
+      <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>BlindMind</span></a>
+      <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>🧠 illiteracy</span></a> 
+      <a href="learnbl/index.html" style="color: white; text-decoration: none;"><span>🔇 Deaf and dumb</span></a> 
+       <button onclick="hideSnackbar()">×</button>
+     </div>
+     
+     <script>
+       const snackbar = document.getElementById("snackbar");
+       let autoHideTimeout;
+     
+       function showSnackbar() {
+         snackbar.classList.add("show");
+         clearTimeout(autoHideTimeout);
+     
+         autoHideTimeout = setTimeout(() => {
+           snackbar.classList.remove("show");
+         }, 4000); 
+       }
+     
+       function hideSnackbar() {
+         snackbar.classList.remove("show");
+         clearTimeout(autoHideTimeout);
+       }
+     
+       
+       window.onload = function () {
+         showSnackbar(); 
+         setInterval(showSnackbar, 5000); 
+       };
+     </script>
+    <div class="container1">
+        <div class="card">
+           <a href="#t" >
+            <style>
+              a {
+                  color: white; 
+                  text-decoration: none; 
+              }
+              
+              a:hover {
+                  color: lightgrey; 
+              }
+          </style>
+            <div class="icon">🔲</div>
+            <h3>Millions of business offerings</h3>
+            <p>Explore products and suppliers for your business from millions of offerings worldwide.</p>
+          </a> 
+        </div>
+        <div class="card">
+          <a href="#h" >
+            <style>
+              a {
+                  color: white; 
+                  text-decoration: none; 
+              }
+              
+              a:hover {
+                  color: lightgrey; 
+              }
+          </style>
+            <div class="icon">✅</div>
+            <h3>Assured quality and transactions</h3>
+            <p>Ensure production quality from verified suppliers, with your orders protected from payment to delivery.</p>
+        </a>
+          </div>
+        <div class="card">
+            <div class="icon">🔁</div>
+            <h3>One-stop trading solution</h3>
+            <p>Order seamlessly from product/supplier search to order management, payment, and fulfillment.</p>
+        </div>
+        <div class="card">
+            <div class="icon">📈</div>
+            <h3>Tailored trading experience</h3>
+            <p>Get curated benefits, exclusive discounts, enhanced protection, and extra support to help grow your business.</p>
+        </div>
+    </div>
+  </div>
+
+
+ <section id="t">
+  <div class="header" >
+  <div class="left-text">
+    <h1>Explore millions of offerings tailored<br>to your business needs</h1>
+  </div>
+
+  <div class="right-numbers">
+      <div class="row">
+        <div class="stat"><span class="orange">200M+</span><br><span class="orange">products</span></div>
+        <div class="divider"></div>
+        <div class="stat"><span class="orange">200K+</span><br><span class="orange">suppliers</span></div>
+      </div>
+      <div class="row">
+        <div class="stat"><span class="orange">5,900</span><br><span class="orange">product categories</span></div>
+        <div class="divider"></div>
+        <div class="stat"><span class="orange">200+</span><br><span class="orange">countries and regions</span></div>
+      </div>
+    </div>
+    
+</div>
+<div class="container2">
+  <a href="clothes1.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">👗<span>Apparel & Accessories</span></div></a>
+  <a href="jewelry.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">💎<span>Jewelry & Eyewear</span></div></a>
+  <a href="shoespage.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">👟<span>Shoes & Accessories</span></div></a>
+  <a href="elect.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">🎧<span>Consumer Electronics</span></div></a>
+  <a href="sport.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style><div class="circle">🎮<span>Sports & Entertainment</span></div></a>
+  <a href="Beauty.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">💄<span>Beauty</span></div>
+</a>
+<a href="carspage.html" >
+  <style>
+    a {
+        color: black; 
+        text-decoration: none; 
+    }
+    
+    a:hover {
+        color: black; 
+    }
+</style>
+  <div class="circle">🚗<span>Vehicle Parts</span></div></a>
+  <a href="furniture1.html" >
+    <style>
+      a {
+          color: black; 
+          text-decoration: none; 
+      }
+      
+      a:hover {
+          color: black; 
+      }
+  </style>
+  <div class="circle">🛋<span>Furniture</span></div></a>
+</div>
+</section>
+
+  
+
+  <!-- القسم الرابع -->
+  <section id="h">
+  <div class="section-3">
+    <div class="container3">
+      <h1 class="main-heading">Trade with confidence from production quality to purchase protection</h1>
+  
+      <div class="cards1">
+        <!-- Verified Supplier Card -->
+        <div class="card1">
+          <h2>Ensure production quality with</h2>
+          <h3><span class="check">✔</span> Verified Supplier</h3>
+          <p>
+            Connect with a variety of suppliers with third-party-verified credentials and capabilities.
+            Look for the "Verified" logo to begin sourcing with experienced suppliers your business could rely on.
+          </p>
+          <div class="buttons1">
+            <button class="btn1">▶ Watch video</button>
+            <a href="#" class="link1">Learn more</a>
+          </div>
+        </div>
+  
+        <!-- Trade Assurance Card -->
+        <div class="card1">
+          <h2>Protect your purchase with</h2>
+          <h3><span class="shield1">🛡</span> Trade Assurance</h3>
+          <p>
+            Source confidently with access to secure payment options, protection against product or shipping issues,
+            and mediation support for any purchase-related concerns when you order and pay on Alibaba.com.
+          </p>
+          <div class="buttons1">
+            <button class="btn1">▶ Watch video</button>
+            <a href="#" class="link1">Learn more</a>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</style>
+  <!-- القسم الرابع -->
+  <div class="section-4">
+    <div class="footer-container">
+      <!-- Standalone Country Box -->
+      <div class="country-box">
+          <h3>Find suppliers by country or region</h3>
+          <div class="country-list">
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-it"></span>
+                  <span class="name">Italy</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-tr"></span>
+                  <span class="name">Turkey</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-my"></span>
+                  <span class="name">Malaysia</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-kr"></span>
+                  <span class="name">South Korea</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-vn"></span>
+                  <span class="name">Vietnam</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-ru"></span>
+                  <span class="name">Russia</span>
+              </div>
+              <div class="country-item">
+                  <span class="flag-icon flag-icon-th"></span>
+                  <span class="name">Thailand</span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Other Footer Sections -->
+          <div class="footer-section">
+              <h3>Get support</h3>
+              <ul>
+                  <li><a href="#">Help Center</a></li>
+                  <li><a href="#">Live chat</a></li>
+                  <li><a href="#">Check order status</a></li>
+                  <li><a href="#">Refunds</a></li>
+                  <li><a href="#">Report abuse</a></li>
+              </ul>
+          </div>
+  
+          <div class="footer-section">
+              <h3>Payments and protections</h3>
+              <ul>
+                  <li><a href="#">Safe and easy payments</a></li>
+                  <li><a href="#">Alibaba.com Business Edge Credit Card</a></li>
+                  <li><a href="#">Money-back policy</a></li>
+                  <li><a href="#">On-time shipping</a></li>
+                  <li><a href="#">After-sales protections</a></li>
+                  <li><a href="#">Product monitoring services</a></li>
+              </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Source on Alibaba.com</h3>
+            <ul>
+                <li><a href="#">Request for Quotation</a></li>
+                <li><a href="#">Membership program</a></li>
+                <li><a href="#">Alibaba.com Logistics</a></li>
+                <li><a href="#">Sales tax and VAT</a></li>
+                <li><a href="#">Alibaba.com Reads</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Sell on Alibaba.com</h3>
+            <ul>
+                <li><a href="#">Start selling</a></li>
+                <li><a href="#">Seller Central</a></li>
+                <li><a href="#">Become a Verified Supplier</a></li>
+                <li><a href="#">Partnerships</a></li>
+                <li><a href="#">Download the app for suppliers</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Get to know us</h3>
+            <ul>
+                <li><a href="#">About Alibaba.com</a></li>
+                <li><a href="#">Corporate responsibility</a></li>
+                <li><a href="#">News center</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+    </div>
+    <h2>Why Choose Us?</h2>
+    <p>Discover the most trusted and powerful B2B and B2C eCommerce platform for global trade, with millions of users worldwide.</p>
+    <a href="#">Learn more</a>
+  </div>
+
+</body>
+</html>
