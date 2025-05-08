@@ -12,7 +12,7 @@ It features:
 - Interactive product images and descriptions with prices and quantities.
 - Voice interaction to support informed decision-making.
 - Full shipping support to all countries.
-- A friendly interface that allows communication between sellers and buyers for price negotiation.
+- A friendly interface that allows communication between sellers and buyers.
 - Smart, secure, and dynamic user experience.
 
 Additionally, we integrated an **educational site** into the Alibaba platform, designed to teach blind or illiterate users how to use a keyboard. This aims to enhance website accessibility and improve digital interaction for all.
